@@ -12,9 +12,11 @@ import org.junit.runner.RunWith;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
+import static androidx.test.espresso.action.ViewActions.typeText;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
+import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.junit.Assert.*;
 
 /**
@@ -46,4 +48,20 @@ public class ActivityInputOutputTests {
         onView(withId(R.id.button_second)).perform(click());
         onView(withId(R.id.text_header_reply)).perform(click());
     }
+
+    //Test text input and output
+    @Test
+    public void textInputOutput() {
+        onView(withId(R.id.editText_main)).perform(typeText("This is the edittext main text"));
+        onView(withId(R.id.button_main)).perform(click());
+        onView(withId(R.id.text_message)).check(matches(withText("This is the edittext main text")));
+    }
+
+
+    /* public void textInputOutput() {
+        onView(withId(R.id.editText_main)).perform(typeText("This is a test."));
+        onView(withId(R.id.button_main)).perform(click());
+        onView(withId(R.id.text_message))
+                .check(matches(withText("This is a test.")));
+    }*/
 }
